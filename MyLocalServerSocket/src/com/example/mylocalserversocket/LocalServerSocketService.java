@@ -41,6 +41,7 @@ public class LocalServerSocketService extends Service {
 						String tmpStr = null;
 						while (null != (tmpStr = br.readLine()) ) {
 							bw.write(tmpStr);
+							bw.newLine();
 						}
 						bw.flush();
 						bw.close();

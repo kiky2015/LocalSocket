@@ -1,7 +1,9 @@
 package com.example.mylocaltest;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 import android.net.LocalSocket;
 import android.net.LocalSocketAddress;
@@ -28,10 +30,14 @@ public class MainActivity extends Activity {
 							try {
 								lsocket = new LocalSocket();
 								lsocket.connect(addr);
-								OutputStream os = lsocket.getOutputStream();
-								os.write(new String("你呀别路啊"+(i++)).getBytes("gbk"));
-								os.flush();
-								os.close();
+								BufferedWriter br = new BufferedWriter(new OutputStreamWriter(lsocket.getOutputStream()));
+								br.write("你呀别路啊" + (i++));
+								br.newLine();
+								br.write("砌砖 莀 "+ (i++));
+								br.newLine();
+								br.write("我的 "+ (i++));
+								br.flush();
+								br.close();
 								lsocket.close();
 								Thread.sleep(200);
 							} catch (IOException e) {

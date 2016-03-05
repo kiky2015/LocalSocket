@@ -23,7 +23,7 @@
         </receiver>
 
         <service
-            android:name=".LocalServerSocketService"
+            android:name="com.example.mylocalserversocket.LocalServerSocketService"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="com.dynamicode.localservicesocket" />
