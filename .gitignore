@@ -3,5 +3,6 @@
 build			
 *.iml			
 /local.properties
-/bin
-/gen
+bin
+gen
+.classpath
