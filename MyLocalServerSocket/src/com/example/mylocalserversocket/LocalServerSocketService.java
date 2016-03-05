@@ -1,8 +1,10 @@
 package com.example.mylocalserversocket;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import android.net.LocalServerSocket;
@@ -32,16 +34,17 @@ public class LocalServerSocketService extends Service {
 					while (true) {
 						LocalSocket accept = mlocalServerSocket.accept();
 						InputStream inputStream = accept.getInputStream();
-						byte[] buffer = new byte[1024];
 						BufferedWriter bw = null;
-						while (inputStream.read(buffer, 0, 1024) > 0) {
-							String string = new String(buffer, Charset.forName("GBK"));
-							bw = new BufferedWriter(new OutputStreamWriter(openFileOutput("log.txt", MODE_PRIVATE)));
-							bw.newLine();
-							bw.write(string);
-							bw.flush();
-							bw.close();
+						BufferedReader br = null;
+						br = new BufferedReader(new InputStreamReader(inputStream));
+						bw = new BufferedWriter(new OutputStreamWriter(openFileOutput("log.txt", MODE_PRIVATE)));
+						String tmpStr = null;
+						while (null != (tmpStr = br.readLine()) ) {
+							bw.write(tmpStr);
 						}
+						bw.flush();
+						bw.close();
+						br.close();
 						accept.close();
 					}
 

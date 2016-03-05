@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
 								os.flush();
 								os.close();
 								lsocket.close();
-								Thread.sleep(1000);
+								Thread.sleep(200);
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
